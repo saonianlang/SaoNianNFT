@@ -12,6 +12,10 @@ contract NFT is ERC721, PullPayment, Ownable {
     // Constants
     uint256 public constant TOTAL_SUPPLY = 1_00;
     uint256 public constant MINT_PRICE = 0.01 ether;
+    uint256 public constant PER_MINT = 1;
+
+    bool public presaleLive;
+    bool public saleLive;
 
     Counters.Counter private currentTokenId;
 
@@ -47,6 +51,14 @@ contract NFT is ERC721, PullPayment, Ownable {
 
         string memory baseURI = _baseURI();
         return bytes(baseURI).length > 0 ? baseURI : "";
+    }
+
+    function togglePresaleStatus() external onlyOwner {
+        presaleLive = !presaleLive;
+    } 
+
+    function toggleSaleStatus() external onlyOwner {
+        saleLive = !saleLive;
     }
 
     /// @dev Sets the base token URI prefix.
