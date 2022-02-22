@@ -1,14 +1,13 @@
-require('dotenv').config();
+require("dotenv").config();
 
-require('@nomiclabs/hardhat-etherscan');
-require('@nomiclabs/hardhat-waffle');
-require('hardhat-gas-reporter');
-require('solidity-coverage');
-require('@openzeppelin/hardhat-upgrades');
+require("@nomiclabs/hardhat-etherscan");
+require("@nomiclabs/hardhat-waffle");
+require("hardhat-gas-reporter");
+require("solidity-coverage");
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
-task('accounts', 'Prints the list of accounts', async (taskArgs, hre) => {
+task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
     const accounts = await hre.ethers.getSigners();
 
     for (const account of accounts) {
@@ -23,17 +22,17 @@ task('accounts', 'Prints the list of accounts', async (taskArgs, hre) => {
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
-    solidity: '0.8.2',
-    defaultNetwork: 'rinkeby',
+    solidity: "0.8.2",
+    defaultNetwork: "rinkeby",
     networks: {
         rinkeby: {
-            url: process.env.RINKEBY_URL || '',
+            url: process.env.RINKEBY_URL || "",
             accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
         },
     },
     gasReporter: {
         enabled: process.env.REPORT_GAS !== undefined,
-        currency: 'USD',
+        currency: "USD",
     },
     etherscan: {
         apiKey: process.env.ETHERSCAN_API_KEY,
