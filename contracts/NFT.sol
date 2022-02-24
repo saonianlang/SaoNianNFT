@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.2;
+pragma solidity ^0.8.4;
 
-import "./ERC721A";
+import "erc721a/contracts/ERC721A.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/security/PullPayment.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
@@ -10,7 +10,8 @@ contract NFT is ERC721A, PullPayment, Ownable {
     using Counters for Counters.Counter;
 
     // Constants
-    uint256 public constant TOTAL_SUPPLY = 1_00_00;
+    uint256 public constant collectionSize = 1_00_00;
+    uint256 public constant maxPerWhitelist = 2;
 
     struct SaleConfig {
         uint32 whitelistSalesTime;
@@ -49,6 +50,11 @@ contract NFT is ERC721A, PullPayment, Ownable {
         for (uint256 i = 0; i < addresses.length; i++) {
             whitelist[addresses[i]] = numSlots[i];
         }
+    }
+
+    modifier callerIsUser() {
+        require(tx.origin == msg.sender, "The caller is another contract");
+        _;
     }
 
     function whitelistMint() external payable callerIsUser {
