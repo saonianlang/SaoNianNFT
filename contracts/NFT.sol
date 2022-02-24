@@ -30,7 +30,7 @@ contract NFT is ERC721A, PullPayment, Ownable {
     /// @dev Base token URI used as a prefix by tokenURI().
     string public baseTokenURI;
 
-    constructor() ERC721A("SaoNianNFT", "SAONIAN") {
+    constructor() ERC721A("GrapeMusic", "GRAPEMUSIC") {
         baseTokenURI = "";
     }
 
