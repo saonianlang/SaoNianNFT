@@ -30,12 +30,6 @@ contract GrapeMusic is Ownable, ERC721A, ReentrancyGuard, ERC721Royalty {
 
     constructor() ERC721A("GrapeMusic", "GRAPEMUSIC") {}
 
-    /// @notice Getter function for _royaltiesReceiver
-    /// @return the address of the royalties recipient
-    function royaltiesReceiver() external returns (address) {
-        return _royaltiesReceiver;
-    }
-
     // 验证交易用户
     modifier callerIsUser() {
         require(tx.origin == msg.sender, "The caller is another contract");
