@@ -6,8 +6,9 @@ import "erc721a/contracts/ERC721A.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Royalty.sol";
 
-contract GrapeMusic is Ownable, ERC721A, ReentrancyGuard {
+contract GrapeMusic is Ownable, ERC721A, ReentrancyGuard, ERC721Royalty {
     uint256 public constant maxPerAddressDuringMint = 5; // 地址的最大mint数量
     uint256 public constant devMaxSize = 200; // 团队预留数量
     uint256 public constant auctionMaxSize = 4800; // 荷兰拍最大交易数量
@@ -28,6 +29,12 @@ contract GrapeMusic is Ownable, ERC721A, ReentrancyGuard {
     mapping(address => uint256) public allowlist;
 
     constructor() ERC721A("GrapeMusic", "GRAPEMUSIC") {}
+
+    /// @notice Getter function for _royaltiesReceiver
+    /// @return the address of the royalties recipient
+    function royaltiesReceiver() external returns (address) {
+        return _royaltiesReceiver;
+    }
 
     // 验证交易用户
     modifier callerIsUser() {
@@ -154,6 +161,11 @@ contract GrapeMusic is Ownable, ERC721A, ReentrancyGuard {
     function setBaseURI(string calldata baseURI) external onlyOwner {
         _baseTokenURI = baseURI;
     }
+
+    // 版税设置
+    function setDefaultRoyalty(address receiver, uint96 feeNumerator) external onlyOwner {
+        return _setDefaultRoyalty()
+    };
 
     /// @dev Go directly to the corresponding NFT image address
     function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
