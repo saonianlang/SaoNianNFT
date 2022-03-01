@@ -45,4 +45,4 @@ npx hardhat verify --network ropsten DEPLOYED_CONTRACT_ADDRESS "Hello, Hardhat!"
 
 - [x] Batch Mint NFT
 - [ ] Transfer royalty
-- [ ] White List
+- [x] White List
