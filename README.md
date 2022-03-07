@@ -44,5 +44,4 @@ npx hardhat verify --network ropsten DEPLOYED_CONTRACT_ADDRESS "Hello, Hardhat!"
 # Implement function
 
 - [x] Batch Mint NFT
-- [x] Transfer royalty
 - [x] White List

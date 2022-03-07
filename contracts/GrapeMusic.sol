@@ -2,13 +2,12 @@
 
 pragma solidity ^0.8.4;
 
-import "erc721a/contracts/ERC721A.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "erc721a/contracts/ERC721A.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Royalty.sol";
 
-contract GrapeMusic is Ownable, ERC721A, ReentrancyGuard, ERC721Royalty {
+contract GrapeMusic is ERC721A, Ownable, ReentrancyGuard {
     uint256 public constant maxPerAddressDuringMint = 5; // 地址的最大mint数量
     uint256 public constant devMaxSize = 40; // 团队预留数量
     uint256 public constant auctionMaxSize = 96; // 荷兰拍最大交易数量
@@ -154,11 +153,6 @@ contract GrapeMusic is Ownable, ERC721A, ReentrancyGuard, ERC721Royalty {
     // 设置资源地址
     function setBaseURI(string calldata baseURI) external onlyOwner {
         _baseTokenURI = baseURI;
-    }
-
-    // 版税设置
-    function setDefaultRoyalty(address receiver, uint96 feeNumerator) external onlyOwner {
-        return _setDefaultRoyalty(receiver, feeNumerator);
     }
 
     // 提取合约金额
