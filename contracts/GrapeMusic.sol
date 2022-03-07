@@ -10,9 +10,9 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Royalty.sol";
 
 contract GrapeMusic is Ownable, ERC721A, ReentrancyGuard, ERC721Royalty {
     uint256 public constant maxPerAddressDuringMint = 5; // 地址的最大mint数量
-    uint256 public constant devMaxSize = 200; // 团队预留数量
-    uint256 public constant auctionMaxSize = 4800; // 荷兰拍最大交易数量
-    uint256 public constant collectionSize = 5000; // 总数量
+    uint256 public constant devMaxSize = 40; // 团队预留数量
+    uint256 public constant auctionMaxSize = 96; // 荷兰拍最大交易数量
+    uint256 public constant collectionSize = 100; // 总数量
 
     // 销售配置结构体
     struct SaleConfig {
@@ -158,15 +158,7 @@ contract GrapeMusic is Ownable, ERC721A, ReentrancyGuard, ERC721Royalty {
 
     // 版税设置
     function setDefaultRoyalty(address receiver, uint96 feeNumerator) external onlyOwner {
-        return _setDefaultRoyalty()
-    };
-
-    /// @dev Go directly to the corresponding NFT image address
-    function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
-        require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
-
-        string memory baseURI = _baseURI();
-        return bytes(baseURI).length > 0 ? baseURI : "";
+        return _setDefaultRoyalty(receiver, feeNumerator);
     }
 
     // 提取合约金额
