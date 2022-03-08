@@ -27,7 +27,7 @@ contract GrapeMusic is ERC721A, Ownable, ReentrancyGuard {
     // 白名单列表
     mapping(address => uint256) public allowlist;
 
-    constructor() ERC721A("GrapeMusic", "GRAPEMUSIC") {}
+    constructor() ERC721A("GrapeMusicTest", "GRAPEMUSICTEST") {}
 
     // 验证交易用户
     modifier callerIsUser() {
