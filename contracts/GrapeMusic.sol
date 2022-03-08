@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.9;
+pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
@@ -26,7 +26,7 @@ contract GrapeMusic is ERC721A, Ownable, ReentrancyGuard {
     // 白名单列表
     mapping(address => uint256) public allowlist;
 
-    constructor() ERC721A("GrapeMusicTest", "GRAPEMUSICTEST") {}
+    constructor() ERC721A("GrapeMusic NFT", "GRAPEMUSICNFT") {}
 
     // 验证交易用户
     modifier callerIsUser() {
