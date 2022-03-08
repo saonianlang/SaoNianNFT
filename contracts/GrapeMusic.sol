@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.11;
+pragma solidity ^0.8.9;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
@@ -9,8 +9,7 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 
 contract GrapeMusic is ERC721A, Ownable, ReentrancyGuard {
     uint256 public constant maxPerAddressDuringMint = 5; // 地址的最大mint数量
-    uint256 public constant devMaxSize = 40; // 团队预留数量
-    uint256 public constant auctionMaxSize = 96; // 荷兰拍最大交易数量
+    uint256 public constant auctionMaxSize = 80; // 荷兰拍最大交易数量
     uint256 public constant collectionSize = 100; // 总数量
 
     // 销售配置结构体
