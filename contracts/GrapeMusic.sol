@@ -9,6 +9,7 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 
 contract GrapeMusic is ERC721A, Ownable, ReentrancyGuard {
     uint256 public constant maxPerAddressDuringMint = 5; // 地址的最大mint数量
+    uint256 public constant auctionMaxSize = 80; // 荷兰拍最大交易数量
     uint256 public constant collectionSize = 100; // 总数量
 
     // 销售配置结构体
@@ -25,7 +26,7 @@ contract GrapeMusic is ERC721A, Ownable, ReentrancyGuard {
     // 白名单列表
     mapping(address => uint256) public allowlist;
 
-    constructor() ERC721A("GrapeMusicTest", "GRAPEMUSICTEST") {}
+    constructor() ERC721A("GrapeMusic", "GRAPEMUSIC") {}
 
     // 验证交易用户
     modifier callerIsUser() {
@@ -39,7 +40,7 @@ contract GrapeMusic is ERC721A, Ownable, ReentrancyGuard {
         // 荷兰拍开始时间
         require(_saleStartTime != 0 && block.timestamp >= _saleStartTime, "sale has not started yet");
         // 购买个数是否大于拍卖最大个数
-        require(totalSupply() + quantity <= collectionSize, "not enough remaining reserved for auction to support desired mint amount");
+        require(totalSupply() + quantity <= auctionMaxSize, "not enough remaining reserved for auction to support desired mint amount");
         // 购买数是否超过个人最大购买
         require(numberMinted(msg.sender) + quantity <= maxPerAddressDuringMint, "can not mint this many");
         // 计算总费用
