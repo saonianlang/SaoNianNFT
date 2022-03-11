@@ -30,12 +30,12 @@ const fileCount = 100;
 
 function setFile(data, index) {
     try {
-        fs.writeFileSync(`/Users/saonian/区块链/工程/SaoNianNFT/metadataFile/${index}.json`, JSON.stringify(data));
+        fs.writeFileSync(`/Users/saonian/区块链/工程/SaoNianNFT/metadataFile/${index}`, JSON.stringify(data));
     } catch (err) {
         console.error(err);
     }
 }
 
 for (let index = 0; index < fileCount; index++) {
-    setFile(metadataJson, index + 1);
+    setFile(metadataJson, index);
 }

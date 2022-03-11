@@ -8,9 +8,9 @@ import "erc721a/contracts/ERC721A.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
 contract GrapeMusic is ERC721A, Ownable, ReentrancyGuard {
-    uint256 public constant maxPerAddressDuringMint = 5; // 地址的最大mint数量
-    uint256 public constant auctionMaxSize = 80; // 荷兰拍最大交易数量
-    uint256 public constant collectionSize = 100; // 总数量
+    uint256 public constant maxPerAddressDuringMint = 15; // 地址的最大mint数量
+    uint256 public constant auctionMaxSize = 15; // 荷兰拍最大交易数量
+    uint256 public constant collectionSize = 30; // 总数量
 
     // 销售配置结构体
     struct SaleConfig {
@@ -26,7 +26,7 @@ contract GrapeMusic is ERC721A, Ownable, ReentrancyGuard {
     // 白名单列表
     mapping(address => uint256) public allowlist;
 
-    constructor() ERC721A("GrapeMusic NFT", "GRAPEMUSICNFT") {}
+    constructor() ERC721A("Grape Music NFT", "GMNFT") {}
 
     // 验证交易用户
     modifier callerIsUser() {
